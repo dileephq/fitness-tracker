@@ -2,11 +2,11 @@ function MyInformation() {
   return (
     <div className="container mx-auto h-screen flex items-center justify-center">
       <div className="flex-col">
-        <p className="block text-gray-900 font-normal mb-2 bg-my-bg-yellow">
+        <p className="block text-gray-950 text-center font-normal mb-2 bg-my-bg-yellow p-2">
           Your daily calorie requirement is -
         </p>
         <div className="p-16 bg-my-bg-gray">
-          <h1 className="text-2xl font-normal mb-4">My Information</h1>
+          <h1 className="text-2xl font-bold mb-4">My Information</h1>
 
           <div className="mb-4">
             <label
