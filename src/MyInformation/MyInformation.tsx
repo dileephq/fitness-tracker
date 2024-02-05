@@ -1,6 +1,6 @@
 function MyInformation() {
   return (
-    <div className="container mx-auto h-screen flex items-center justify-center">
+    <div className="container min-h-screen mx-auto flex items-center justify-center">
       <div className="flex-col">
         <p className="block text-gray-950 text-center font-normal mb-2 bg-my-bg-yellow p-2">
           Your daily calorie requirement is -
