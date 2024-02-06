@@ -2,8 +2,8 @@ function MyInformation() {
   return (
     <div className="container min-h-screen mx-auto flex items-center justify-center">
       <div className="flex-col">
-        <p className="block text-gray-950 text-center font-normal mb-2 bg-my-bg-yellow p-2">
-          Your daily calorie requirement is -
+        <p className="block text-gray-700 text-center font-medium mb-2 bg-my-bg-yellow p-2">
+          Your daily calorie requirement is 0
         </p>
         <div className="p-16 bg-my-bg-gray">
           <h1 className="text-2xl font-bold mb-4">My Information</h1>
@@ -19,7 +19,6 @@ function MyInformation() {
               type="number"
               id="height"
               className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
-              placeholder="Enter your height"
             />
           </div>
 
@@ -34,7 +33,6 @@ function MyInformation() {
               type="number"
               id="weight"
               className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
-              placeholder="Enter your weight"
             />
           </div>
 
@@ -49,7 +47,6 @@ function MyInformation() {
               type="number"
               id="age"
               className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
-              placeholder="Enter your age"
             />
           </div>
 
