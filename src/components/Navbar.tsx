@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 interface NavbarProps {}
 
@@ -9,9 +9,9 @@ const Navbar: React.FC<NavbarProps> = () => {
   return (
     <nav className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-2 flex items-baseline">
-        <a href="#" className="font-bold text-2xl mr-6">
+        <NavLink to="/" className="font-bold text-2xl mr-6">
           Fitness Tracker
-        </a>
+        </NavLink>
 
         {/* Toggle button for mobile menu */}
 
@@ -35,24 +35,27 @@ const Navbar: React.FC<NavbarProps> = () => {
           className={` hidden md:flex space-x-8 ${isOpen ? 'block' : 'hidden'}`}
         >
           <li>
-            <Link className="hover:text-gray-700 text-xl" to="/">
+            <NavLink className="hover:text-gray-700 text-xl" to="/">
               Dashboard
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="hover:text-gray-700 text-xl" to="/meals">
+            <NavLink className="hover:text-gray-700 text-xl" to="/meals">
               Meals
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="hover:text-gray-700 text-xl" to="/activity">
+            <NavLink className="hover:text-gray-700 text-xl" to="/activity">
               Activity
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="hover:text-gray-700 text-xl" to="/my-information">
+            <NavLink
+              className="hover:text-gray-700 text-xl"
+              to="/my-information"
+            >
               My Information
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

@@ -6,13 +6,11 @@ import Navbar from './components/Navbar'
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/my-information" element={<MyInformation />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/my-information" element={<MyInformation />} />
+      </Routes>
     </BrowserRouter>
   )
 }
