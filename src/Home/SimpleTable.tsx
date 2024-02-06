@@ -7,9 +7,31 @@ interface TableRow {
   calories: number
 }
 
-interface TableProps {
+export interface TableProps {
   data: TableRow[]
   headers: string[]
+}
+
+function TableFooter() {
+  return (
+    <tbody className="bg-my-bg-gray">
+      <tr className="font-bold">
+        <td className="px-4 py-2 ">Net Calories Consumed</td>
+        <td className="px-4 py-2 ">182.5</td>
+        <td />
+      </tr>
+      <tr className="font-bold">
+        <td className="px-4 py-2 ">Daily Calories Required</td>
+        <td className="px-4 py-2 ">2500.0</td>
+        <td />
+      </tr>
+      <tr className="font-bold">
+        <td className="px-4 py-2 ">Balance</td>
+        <td className="px-4 py-2 ">150.0</td>
+        <td />
+      </tr>
+    </tbody>
+  )
 }
 
 const SimpleTable: React.FC<TableProps> = ({ data, headers }) => {
@@ -35,23 +57,7 @@ const SimpleTable: React.FC<TableProps> = ({ data, headers }) => {
           </tr>
         ))}
       </tbody>
-      <tbody className="bg-my-bg-gray">
-        <tr className="font-bold">
-          <td className="px-4 py-2 ">Net Calories Consumed</td>
-          <td className="px-4 py-2 ">182.5</td>
-          <td />
-        </tr>
-        <tr className="font-bold">
-          <td className="px-4 py-2 ">Daily Calories Required</td>
-          <td className="px-4 py-2 ">2500.0</td>
-          <td />
-        </tr>
-        <tr className="font-bold">
-          <td className="px-4 py-2 ">Balance</td>
-          <td className="px-4 py-2 ">150.0</td>
-          <td />
-        </tr>
-      </tbody>
+      <TableFooter />
     </table>
   )
 }
