@@ -6,14 +6,7 @@ type PersonalInfo = {
   activityLevel: string
 }
 
-export type ActivityType = {
-  name: 'string'
-  date: string
-  calories: number
-}
-
-// TODO remove one of the types
-export type MealType = {
+export type Action = {
   name: string
   date: string
   calories: number
@@ -28,20 +21,20 @@ type SavePersonalInfoAction = {
 
 type AddMealAction = {
   type: 'add-meal'
-  payload: { meal: MealType }
+  payload: { meal: Action }
 }
 
 type AddActivityAction = {
   type: 'add-activity'
-  payload: { activity: ActivityType }
+  payload: { activity: Action }
 }
 
 type AppActions = SavePersonalInfoAction | AddMealAction | AddActivityAction
 
 type AppState = {
   info: PersonalInfo
-  meals: MealType[]
-  activities: ActivityType[]
+  meals: Action[]
+  activities: Action[]
 }
 
 export const initialState: AppState = {

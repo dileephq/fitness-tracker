@@ -1,28 +1,25 @@
-interface TableRow {
-  id: number
-  activity: string
-  date: string
-  calories: number
-}
+import { useReducer, useState } from 'react'
+import appReducer, { Action, initialState } from '../shared/reducter.ts'
+
 function Activity() {
-  const formattedDateTime = new Date().toLocaleString()
+  const [state, dispatch] = useReducer(appReducer, initialState)
+  const activities = state.activities
 
-  const tableData: TableRow[] = [
-    {
-      id: 1,
-      activity: 'walking',
-      date: formattedDateTime,
-      calories: 54.45,
-    },
-    {
-      id: 2,
-      activity: 'running',
-      date: formattedDateTime,
-      calories: 254.4,
-    },
-  ]
+  const [type, setType] = useState('')
+  const [time, setTime] = useState(0)
 
-  const headers = ['activity', 'calories', 'date']
+  //  TODO make it ''activity' instead of 'name'
+  const headers = ['name', 'calories', 'date']
+
+  const onSave = () => {
+    const date = new Date().toLocaleString()
+    const activity: Action = {
+      calories: Math.ceil(time * Math.random() * 10),
+      date,
+      name: type,
+    }
+    dispatch({ type: 'add-activity', payload: { activity } })
+  }
 
   return (
     <div className="container min-h-screen mx-auto flex items-center justify-center">
@@ -39,11 +36,11 @@ function Activity() {
             </tr>
           </thead>
           <tbody>
-            {tableData.map((row) => (
-              <tr key={row.id}>
+            {activities.map((row) => (
+              <tr key={row.date}>
                 {headers.map((header) => (
                   <td key={header} className=" px-4 py-2">
-                    {row[header as keyof TableRow]}
+                    {row[header as keyof Action]}
                   </td>
                 ))}
               </tr>
@@ -51,7 +48,13 @@ function Activity() {
           </tbody>
         </table>
       </div>
-      <div className="ml-6 p-16 bg-my-bg-gray">
+      <form
+        className="ml-6 p-16 bg-my-bg-gray"
+        onSubmit={(e) => {
+          e.preventDefault()
+          onSave()
+        }}
+      >
         <h1 className="text-2xl font-bold mb-4">Add Activity</h1>
         <div className="mb-4">
           <label
@@ -63,11 +66,13 @@ function Activity() {
           <select
             id="activityType"
             className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
           >
             <option value="">Select activity</option>
-            <option value="running">Running</option>
-            <option value="walking">Walking</option>
-            <option value="swimming">Swimming</option>
+            <option value="Running">Running</option>
+            <option value="Walking">Walking</option>
+            <option value="Swimming">Swimming</option>
           </select>
         </div>
 
@@ -82,6 +87,8 @@ function Activity() {
             type="number"
             id="time"
             className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
+            value={time}
+            onChange={(e) => setTime(e.target.valueAsNumber)}
           />
         </div>
         <div className="flex justify-evenly mt-5">
@@ -92,13 +99,13 @@ function Activity() {
             Cancel
           </button>
           <button
-            type="button"
+            type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded mr-2"
           >
             Save
           </button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

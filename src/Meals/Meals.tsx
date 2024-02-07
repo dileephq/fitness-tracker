@@ -1,5 +1,5 @@
 import { useReducer, useState } from 'react'
-import appReducer, { initialState, MealType } from '../shared/reducter.ts'
+import appReducer, { initialState, Action } from '../shared/reducter.ts'
 
 function Meals() {
   const [state, dispatch] = useReducer(appReducer, initialState)
@@ -13,7 +13,7 @@ function Meals() {
 
   const onSave = () => {
     const date = new Date().toLocaleString()
-    const meal: MealType = {
+    const meal: Action = {
       calories,
       date,
       name,
@@ -40,7 +40,7 @@ function Meals() {
               <tr key={meal.date}>
                 {headers.map((header) => (
                   <td key={header} className=" px-4 py-2">
-                    {meal[header as keyof MealType]}
+                    {meal[header as keyof Action]}
                   </td>
                 ))}
               </tr>
