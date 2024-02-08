@@ -6,7 +6,7 @@ type HomeProps = {
   state: AppState
   dispatch: Dispatch<AppActions>
 }
-const Home = ({ state }: HomeProps) => {
+const Home = ({ state, dispatch }: HomeProps) => {
   const { info, activities, meals } = state
   const logs = [...activities, ...meals]
 
@@ -38,6 +38,7 @@ const Home = ({ state }: HomeProps) => {
         <button
           type="button"
           className="bg-gray-400 mt-4 hover:bg-gray-500 text-white font-normal px-8 rounded"
+          onClick={() => dispatch({ type: 'clear-data' })}
         >
           Clear Data
         </button>

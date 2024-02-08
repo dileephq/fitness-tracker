@@ -64,6 +64,7 @@ function TableFooter({ calorieRequirement, sum }: FooterProps) {
       </tr>
       <tr className="font-bold">
         <td className="px-4 py-2 ">Daily Calories Required</td>
+        {/*  TODO not being reset after ClearDataAction */}
         <td className="px-4 py-2 ">{calorieRequirement}</td>
         <td />
       </tr>

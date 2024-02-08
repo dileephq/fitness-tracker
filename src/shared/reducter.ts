@@ -29,10 +29,15 @@ type AddActivityAction = {
   payload: { activity: Action }
 }
 
+type ClearDataAction = {
+  type: 'clear-data'
+}
+
 export type AppActions =
   | SavePersonalInfoAction
   | AddMealAction
   | AddActivityAction
+  | ClearDataAction
 
 export type AppState = {
   info: PersonalInfo
@@ -62,7 +67,9 @@ const appReducer = (state: AppState = initialState, action: AppActions) => {
     return { ...state, meals: [...state.meals, meal] }
   }
 
-  // TODO clear data action
+  if (action.type === 'clear-data') {
+    return initialState
+  }
 
   return state
 }
