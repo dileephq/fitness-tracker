@@ -1,28 +1,29 @@
-interface TableRow {
-  id: number
-  meal: string
-  date: string
-  calories: number
+import { Dispatch, useState } from 'react'
+import { Action, AppActions, AppState } from '../shared/reducter.ts'
+
+type MealsProps = {
+  state: AppState
+  dispatch: Dispatch<AppActions>
 }
-function Meals() {
-  const formattedDateTime = new Date().toLocaleString()
 
-  const tableData: TableRow[] = [
-    {
-      id: 1,
-      meal: 'Breakfast',
-      date: formattedDateTime,
-      calories: 54.4,
-    },
-    {
-      id: 2,
-      meal: 'Lunch',
-      date: formattedDateTime,
-      calories: 254.4,
-    },
-  ]
+const Meals = ({ state, dispatch }: MealsProps) => {
+  const meals = state.meals
 
-  const headers = ['meal', 'calories', 'date']
+  const [name, setName] = useState('')
+  const [calories, setCalories] = useState(0)
+
+  //  TODO make it ''meal' instead of 'name'
+  const headers = ['name', 'calories', 'date']
+
+  const onSave = () => {
+    const date = new Date().toLocaleString()
+    const meal: Action = {
+      calories,
+      date,
+      name,
+    }
+    dispatch({ type: 'add-meal', payload: { meal } })
+  }
 
   return (
     <div className="container min-h-screen mx-auto flex items-center justify-center">
@@ -39,11 +40,11 @@ function Meals() {
             </tr>
           </thead>
           <tbody>
-            {tableData.map((row) => (
-              <tr key={row.id}>
+            {meals.map((meal) => (
+              <tr key={meal.date}>
                 {headers.map((header) => (
                   <td key={header} className=" px-4 py-2">
-                    {row[header as keyof TableRow]}
+                    {meal[header as keyof Action]}
                   </td>
                 ))}
               </tr>
@@ -51,7 +52,13 @@ function Meals() {
           </tbody>
         </table>
       </div>
-      <div className="ml-6 p-16 bg-my-bg-gray">
+      <form
+        className="ml-6 p-16 bg-my-bg-gray"
+        onSubmit={(e) => {
+          e.preventDefault()
+          onSave()
+        }}
+      >
         <h1 className="text-2xl font-bold mb-4">Add Meal</h1>
         <div className="mb-4">
           <label
@@ -64,6 +71,8 @@ function Meals() {
             type="text"
             id="name"
             className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -77,6 +86,8 @@ function Meals() {
             type="number"
             id="calories"
             className="border rounded py-2 px-3 w-full text-gray-700 leading-tight focus:outline-none"
+            value={calories}
+            onChange={(e) => setCalories(e.target.valueAsNumber)}
           />
         </div>
         <div className="flex justify-evenly mt-5">
@@ -87,13 +98,13 @@ function Meals() {
             Cancel
           </button>
           <button
-            type="button"
+            type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-2 px-4 rounded mr-2"
           >
             Save
           </button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }
