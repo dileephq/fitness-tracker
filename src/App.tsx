@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home state={state} dispatch={dispatch} />} />
         <Route
           path="/meals"
           element={<Meals state={state} dispatch={dispatch} />}

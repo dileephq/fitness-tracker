@@ -15,9 +15,10 @@ const MyInformation = ({ state, dispatch }: MyInformationProps) => {
   const [activityLevel, setActivityLevel] = useState(info.activityLevel ?? '')
   const [calorieRequirement, setCalorieRequirement] = useState(0)
 
+  // TODO custom hook
   useEffect(() => {
     if (Object.keys(info).length !== 0) {
-      setCalorieRequirement(Math.ceil(info.height * Math.random() * 20))
+      setCalorieRequirement(Math.ceil((info.height * info.weight) / info.age))
     }
   }, [info])
 
@@ -29,7 +30,6 @@ const MyInformation = ({ state, dispatch }: MyInformationProps) => {
       gender,
       activityLevel,
     }
-    setCalorieRequirement(Math.ceil(info.height * Math.random() * 200))
     dispatch({ type: 'add-info', payload: { info } })
   }
 
