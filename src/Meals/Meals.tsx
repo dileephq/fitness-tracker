@@ -1,8 +1,12 @@
-import { useReducer, useState } from 'react'
-import appReducer, { initialState, Action } from '../shared/reducter.ts'
+import { Dispatch, useState } from 'react'
+import { Action, AppActions, AppState } from '../shared/reducter.ts'
 
-function Meals() {
-  const [state, dispatch] = useReducer(appReducer, initialState)
+type MealsProps = {
+  state: AppState
+  dispatch: Dispatch<AppActions>
+}
+
+const Meals = ({ state, dispatch }: MealsProps) => {
   const meals = state.meals
 
   const [name, setName] = useState('')

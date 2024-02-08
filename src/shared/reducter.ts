@@ -1,4 +1,4 @@
-type PersonalInfo = {
+export type PersonalInfo = {
   height: number
   weight: number
   age: number
@@ -13,7 +13,7 @@ export type Action = {
 }
 
 type SavePersonalInfoAction = {
-  type: 'save-my-info'
+  type: 'add-info'
   payload: {
     info: PersonalInfo
   }
@@ -29,9 +29,12 @@ type AddActivityAction = {
   payload: { activity: Action }
 }
 
-type AppActions = SavePersonalInfoAction | AddMealAction | AddActivityAction
+export type AppActions =
+  | SavePersonalInfoAction
+  | AddMealAction
+  | AddActivityAction
 
-type AppState = {
+export type AppState = {
   info: PersonalInfo
   meals: Action[]
   activities: Action[]
@@ -44,7 +47,7 @@ export const initialState: AppState = {
 }
 
 const appReducer = (state: AppState = initialState, action: AppActions) => {
-  if (action.type === 'save-my-info') {
+  if (action.type === 'add-info') {
     const { info } = action.payload
     return { ...state, info }
   }

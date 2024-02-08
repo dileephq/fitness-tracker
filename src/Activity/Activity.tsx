@@ -1,8 +1,12 @@
-import { useReducer, useState } from 'react'
-import appReducer, { Action, initialState } from '../shared/reducter.ts'
+import { Dispatch, useState } from 'react'
+import { Action, AppActions, AppState } from '../shared/reducter.ts'
 
-function Activity() {
-  const [state, dispatch] = useReducer(appReducer, initialState)
+type ActivityProps = {
+  state: AppState
+  dispatch: Dispatch<AppActions>
+}
+
+const Activity = ({ state, dispatch }: ActivityProps) => {
   const activities = state.activities
 
   const [type, setType] = useState('')
