@@ -18,7 +18,7 @@ const Activity = ({ state, dispatch }: ActivityProps) => {
   const onSave = () => {
     const date = new Date().toLocaleString()
     const activity: Action = {
-      calories: Math.ceil(time * Math.random() * 10),
+      calories: Math.ceil(time * Math.random() * 10) * -1,
       date,
       name: type,
     }

@@ -62,6 +62,8 @@ const appReducer = (state: AppState = initialState, action: AppActions) => {
     return { ...state, meals: [...state.meals, meal] }
   }
 
+  // TODO clear data action
+
   return state
 }
 

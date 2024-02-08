@@ -1,40 +1,27 @@
 import React from 'react'
 
-interface TableRow {
-  id: number
+export type Log = {
   log: string
-  time: string
+  date: string
   calories: number
 }
 
 export interface TableProps {
-  data: TableRow[]
+  logs: Log[]
   headers: string[]
+  calorieRequirement: number
 }
 
-function TableFooter() {
-  return (
-    <tbody className="bg-my-bg-gray">
-      <tr className="font-bold">
-        <td className="px-4 py-2 ">Net Calories Consumed</td>
-        <td className="px-4 py-2 ">182.5</td>
-        <td />
-      </tr>
-      <tr className="font-bold">
-        <td className="px-4 py-2 ">Daily Calories Required</td>
-        <td className="px-4 py-2 ">2500.0</td>
-        <td />
-      </tr>
-      <tr className="font-bold">
-        <td className="px-4 py-2 ">Balance</td>
-        <td className="px-4 py-2 ">150.0</td>
-        <td />
-      </tr>
-    </tbody>
-  )
-}
+const SimpleTable: React.FC<TableProps> = ({
+  calorieRequirement,
+  logs,
+  headers,
+}) => {
+  let sum = 0
+  logs.forEach((obj) => {
+    sum += obj.calories
+  })
 
-const SimpleTable: React.FC<TableProps> = ({ data, headers }) => {
   return (
     <table className="table-auto border-collapse border border-gray-200">
       <thead className="bg-my-bg-gray">
@@ -47,18 +34,45 @@ const SimpleTable: React.FC<TableProps> = ({ data, headers }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((row) => (
-          <tr key={row.id}>
+        {/* TODO order of display is jumping*/}
+        {logs.map((log) => (
+          <tr key={log.date}>
             {headers.map((header) => (
               <td key={header} className="border px-4 py-2">
-                {row[header as keyof TableRow]}
+                {log[header as keyof Log]}
               </td>
             ))}
           </tr>
         ))}
       </tbody>
-      <TableFooter />
+      <TableFooter calorieRequirement={calorieRequirement} sum={sum} />
     </table>
+  )
+}
+
+export interface FooterProps {
+  calorieRequirement: number
+  sum: number
+}
+function TableFooter({ calorieRequirement, sum }: FooterProps) {
+  return (
+    <tbody className="bg-my-bg-gray">
+      <tr className="font-bold">
+        <td className="px-4 py-2 ">Net Calories Consumed</td>
+        <td className="px-4 py-2 ">{sum}</td>
+        <td />
+      </tr>
+      <tr className="font-bold">
+        <td className="px-4 py-2 ">Daily Calories Required</td>
+        <td className="px-4 py-2 ">{calorieRequirement}</td>
+        <td />
+      </tr>
+      <tr className="font-bold">
+        <td className="px-4 py-2 ">Balance</td>
+        <td className="px-4 py-2 ">{calorieRequirement - sum}</td>
+        <td />
+      </tr>
+    </tbody>
   )
 }
 
