@@ -17,7 +17,6 @@ const MyInformation = ({ state, dispatch }: MyInformationProps) => {
   )
   const [calorieRequirement, setCalorieRequirement] = useState(0)
 
-  console.log(height, weight, age, calorieRequirement)
   // TODO custom hook
   useEffect(() => {
     if (Object.keys(info).length !== 0) {
