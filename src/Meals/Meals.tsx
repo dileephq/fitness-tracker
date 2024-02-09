@@ -28,7 +28,7 @@ const Meals = ({ state, dispatch }: MealsProps) => {
   return (
     <div className="container min-h-screen mx-auto flex items-center justify-center">
       <div className="bg-my-bg-yellow p-16">
-        <h1 className="text-2xl font-bold mb-4">Meal Logs</h1>
+        <h2 className="text-2xl font-bold mb-4">Meal Logs</h2>
         <table className="table-auto border-collapse border border-gray-200">
           <thead>
             <tr className="border-b">
@@ -59,7 +59,7 @@ const Meals = ({ state, dispatch }: MealsProps) => {
           onSave()
         }}
       >
-        <h1 className="text-2xl font-bold mb-4">Add Meal</h1>
+        <h2 className="text-2xl font-bold mb-4">Add Meal</h2>
         <div className="mb-4">
           <label
             htmlFor="name"
