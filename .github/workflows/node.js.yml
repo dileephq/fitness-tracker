@@ -32,5 +32,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
-          folder: dist
+          folder: build
           commit_message: 'Automatic deployment from ${{ needs.build.outputs.deploy_branch }}'
