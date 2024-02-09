@@ -18,7 +18,7 @@ const Activity = ({ state, dispatch }: ActivityProps) => {
   const onSave = () => {
     const date = new Date().toLocaleString()
     const activity: Action = {
-      calories: Math.ceil(time * Math.random() * 10) * -1,
+      calories: Math.ceil(time * 10) * -1,
       date,
       name: type,
     }
@@ -27,31 +27,33 @@ const Activity = ({ state, dispatch }: ActivityProps) => {
 
   return (
     <div className="container min-h-screen mx-auto flex items-center justify-center">
-      <div className="bg-my-bg-yellow p-16">
-        <h1 className="text-2xl font-bold mb-4">Activity Logs</h1>
-        <table className="table-auto border-collapse border border-gray-200">
-          <thead>
-            <tr className="border-b">
-              {headers.map((header) => (
-                <th key={header} className="px-4 py-2 capitalize text-start">
-                  {header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {activities.map((row) => (
-              <tr key={row.date}>
+      {activities.length > 0 && (
+        <div className="bg-my-bg-yellow p-16">
+          <h2 className="text-2xl font-bold mb-4">Activity Logs</h2>
+          <table className="table-auto border-collapse border border-gray-200">
+            <thead>
+              <tr className="border-b">
                 {headers.map((header) => (
-                  <td key={header} className=" px-4 py-2">
-                    {row[header as keyof Action]}
-                  </td>
+                  <th key={header} className="px-4 py-2 capitalize text-start">
+                    {header}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {activities.map((row) => (
+                <tr key={row.date}>
+                  {headers.map((header) => (
+                    <td key={header} className=" px-4 py-2">
+                      {row[header as keyof Action]}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <form
         className="ml-6 p-16 bg-my-bg-gray"
         onSubmit={(e) => {
@@ -59,7 +61,7 @@ const Activity = ({ state, dispatch }: ActivityProps) => {
           onSave()
         }}
       >
-        <h1 className="text-2xl font-bold mb-4">Add Activity</h1>
+        <h2 className="text-2xl font-bold mb-4">Add Activity</h2>
         <div className="mb-4">
           <label
             htmlFor="activityType"
@@ -73,7 +75,6 @@ const Activity = ({ state, dispatch }: ActivityProps) => {
             value={type}
             onChange={(e) => setType(e.target.value)}
           >
-            <option value="">Select activity</option>
             <option value="Running">Running</option>
             <option value="Walking">Walking</option>
             <option value="Swimming">Swimming</option>

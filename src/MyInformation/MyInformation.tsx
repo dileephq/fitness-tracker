@@ -111,7 +111,6 @@ const MyInformation = ({ state, dispatch }: MyInformationProps) => {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
-              <option value="">Select your gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -130,7 +129,6 @@ const MyInformation = ({ state, dispatch }: MyInformationProps) => {
               value={activityLevel}
               onChange={(e) => setActivityLevel(e.target.value)}
             >
-              <option value="">Select activity</option>
               <option value="sedentary">Sedentary</option>
               <option value="light">Light Exercise</option>
               <option value="moderate">Moderate Exercise</option>

@@ -27,31 +27,33 @@ const Meals = ({ state, dispatch }: MealsProps) => {
 
   return (
     <div className="container min-h-screen mx-auto flex items-center justify-center">
-      <div className="bg-my-bg-yellow p-16">
-        <h2 className="text-2xl font-bold mb-4">Meal Logs</h2>
-        <table className="table-auto border-collapse border border-gray-200">
-          <thead>
-            <tr className="border-b">
-              {headers.map((header) => (
-                <th key={header} className="px-4 py-2 capitalize text-start">
-                  {header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {meals.map((meal) => (
-              <tr key={meal.date}>
+      {meals.length > 0 && (
+        <div className="bg-my-bg-yellow p-16">
+          <h2 className="text-2xl font-bold mb-4">Meal Logs</h2>
+          <table className="table-auto border-collapse border border-gray-200">
+            <thead>
+              <tr className="border-b">
                 {headers.map((header) => (
-                  <td key={header} className=" px-4 py-2">
-                    {meal[header as keyof Action]}
-                  </td>
+                  <th key={header} className="px-4 py-2 capitalize text-start">
+                    {header}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {meals.map((meal) => (
+                <tr key={meal.date}>
+                  {headers.map((header) => (
+                    <td key={header} className=" px-4 py-2">
+                      {meal[header as keyof Action]}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <form
         className="ml-6 p-16 bg-my-bg-gray"
         onSubmit={(e) => {

@@ -16,7 +16,7 @@ const initialState: AppState = {
   activities: [],
 }
 const mockDispatch: Dispatch<AppActions> = vi.fn()
-describe('<Meals />', () => {
+describe('Meals component', () => {
   it('mounts component properly', () => {
     render(<Meals state={initialState} dispatch={mockDispatch} />)
 
@@ -31,13 +31,41 @@ describe('<Meals />', () => {
       screen.getByRole('heading', { name: /Add Meal/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /Meal Logs/i }),
-    ).toBeInTheDocument()
+      screen.queryByRole('heading', { name: /Meal Logs/i }),
+    ).not.toBeInTheDocument()
 
     const saveButton = screen.getByRole('button', { name: /Save/i })
     const cancelButton = screen.getByRole('button', { name: /Cancel/i })
     expect(saveButton).toBeInTheDocument()
     expect(cancelButton).toBeInTheDocument()
+  })
+
+  it('renders Meals correctly', () => {
+    const state: AppState = {
+      ...initialState,
+      meals: [
+        { name: 'Breakfast', date: '09/02/2024, 08:27:56', calories: 300 },
+        { name: 'Lunch', date: '19/02/2023, 09:16:56', calories: 500 },
+      ],
+    }
+    render(<Meals state={state} dispatch={mockDispatch} />)
+
+    expect(
+      screen.getByRole('heading', { name: /Add Meal/i }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /Meal Logs/i }),
+    ).toBeInTheDocument()
+
+    const tableRows = screen.getAllByRole('row')
+    expect(tableRows.length).toBe(3)
+
+    expect(screen.getByText(/Breakfast/i)).toBeInTheDocument()
+    expect(screen.getByText(/Lunch/i)).toBeInTheDocument()
+    expect(screen.getByText('09/02/2024, 08:27:56')).toBeInTheDocument()
+    expect(screen.getByText('19/02/2023, 09:16:56')).toBeInTheDocument()
+    expect(screen.getByText(/300/i)).toBeInTheDocument()
+    expect(screen.getByText(/500/i)).toBeInTheDocument()
   })
 
   it('adds a new meal', async () => {
@@ -63,30 +91,5 @@ describe('<Meals />', () => {
       type: 'add-meal',
       payload: { meal },
     })
-  })
-
-  it('renders Meals correctly', () => {
-    const state: AppState = {
-      ...initialState,
-      meals: [
-        { name: 'Breakfast', date: '09/02/2024, 08:27:56', calories: 300 },
-        { name: 'Lunch', date: '19/02/2023, 09:16:56', calories: 500 },
-      ],
-    }
-    render(<Meals state={state} dispatch={mockDispatch} />)
-
-    expect(
-      screen.getByRole('heading', { name: /Meal Logs/i }),
-    ).toBeInTheDocument()
-
-    const tableRows = screen.getAllByRole('row')
-    expect(tableRows.length).toBe(3)
-
-    expect(screen.getByText(/Breakfast/i)).toBeInTheDocument()
-    expect(screen.getByText(/Lunch/i)).toBeInTheDocument()
-    expect(screen.getByText('09/02/2024, 08:27:56')).toBeInTheDocument()
-    expect(screen.getByText('19/02/2023, 09:16:56')).toBeInTheDocument()
-    expect(screen.getByText(/300/i)).toBeInTheDocument()
-    expect(screen.getByText(/500/i)).toBeInTheDocument()
   })
 })
