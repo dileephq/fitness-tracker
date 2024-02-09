@@ -20,7 +20,7 @@ const Home = ({ state, dispatch }: HomeProps) => {
   // TODO custom hook
   useEffect(() => {
     if (Object.keys(info).length !== 0) {
-      setCalorieRequirement(Math.ceil((info.height * info.weight) / info.age))
+      setCalorieRequirement((info.height * info.weight) / 5)
     }
   }, [info])
 

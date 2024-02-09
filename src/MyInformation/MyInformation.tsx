@@ -11,14 +11,17 @@ const MyInformation = ({ state, dispatch }: MyInformationProps) => {
   const [height, setHeight] = useState(info.height | 0)
   const [weight, setWeight] = useState(info.weight | 0)
   const [age, setAge] = useState(info.age | 0)
-  const [gender, setGender] = useState(info.gender ?? '')
-  const [activityLevel, setActivityLevel] = useState(info.activityLevel ?? '')
+  const [gender, setGender] = useState(info.gender ?? 'male')
+  const [activityLevel, setActivityLevel] = useState(
+    info.activityLevel ?? 'sedentary',
+  )
   const [calorieRequirement, setCalorieRequirement] = useState(0)
 
+  console.log(height, weight, age, calorieRequirement)
   // TODO custom hook
   useEffect(() => {
     if (Object.keys(info).length !== 0) {
-      setCalorieRequirement(Math.ceil((info.height * info.weight) / info.age))
+      setCalorieRequirement((info.height * info.weight) / 5)
     }
   }, [info])
 

@@ -9,7 +9,7 @@ type ActivityProps = {
 const Activity = ({ state, dispatch }: ActivityProps) => {
   const activities = state.activities
 
-  const [type, setType] = useState('')
+  const [type, setType] = useState('Running')
   const [time, setTime] = useState(0)
 
   //  TODO make it ''activity' instead of 'name'
