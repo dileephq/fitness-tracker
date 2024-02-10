@@ -26,9 +26,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-  build-and-deploy:
-    permissions:
-      id-token: write
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,8 +36,20 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+  deploy:
+    permissions:
+      id-token: write
+      pages: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - run: npm ci
+      - run: npm run build
       - run: ls -l
-      - uses: actions/deploy-pages@v1
+      - uses: actions/deploy-pages@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           source: dist/
