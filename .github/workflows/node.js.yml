@@ -30,6 +30,8 @@ jobs:
           path: playwright-report/
           retention-days: 30
   build-and-deploy:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
