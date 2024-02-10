@@ -40,6 +40,12 @@ jobs:
           node-version: 20.x
       - run: npm ci
       - run: npm run build
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: artifact
+          path: dist/
+          retention-days: 30
       - name: Print artifact URL
         run: echo "${{ steps.build-and-deploy.outputs.artifact_url }}"
       - run: npm test
