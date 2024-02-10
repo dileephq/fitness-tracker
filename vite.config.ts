@@ -12,5 +12,4 @@ export default defineConfig({
     setupFiles: ['src/setupTest.ts'],
     exclude: [...defaultExclude, '**/*.spec**'],
   },
-  base: '/',
 })
