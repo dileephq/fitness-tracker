@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          clean: true
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -49,3 +51,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+      - uses: actions/cache@v1
+        with:
+          path: './dist'
+          key: ""
