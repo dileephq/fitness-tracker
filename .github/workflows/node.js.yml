@@ -51,6 +51,4 @@ jobs:
       - run: ls -l
       - uses: actions/deploy-pages@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          source: dist
-          page_visibility: public
+          artifact_name: dist
