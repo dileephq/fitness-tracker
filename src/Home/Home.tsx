@@ -21,6 +21,8 @@ const Home = ({ state, dispatch }: HomeProps) => {
   useEffect(() => {
     if (Object.keys(info).length !== 0) {
       setCalorieRequirement((info.height * info.weight) / 5)
+    } else {
+      setCalorieRequirement(0)
     }
   }, [info])
 

@@ -153,5 +153,10 @@ test('track my calories journey', async ({ page }) => {
 
   await expect(page.getByRole('cell', { name: '220' })).toBeVisible()
   await page.getByRole('button', { name: 'Clear Data' }).click()
-  await page.getByRole('cell', { name: '0', exact: true }).click()
+
+  await page.getByRole('link', { name: 'Dashboard' }).click()
+  const numberOfZeros = await page
+    .getByRole('cell', { name: '0', exact: true })
+    .count()
+  expect(numberOfZeros).toBe(3)
 })
