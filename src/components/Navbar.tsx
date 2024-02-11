@@ -1,62 +1,63 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
-interface NavbarProps {}
+const Navbar = () => {
+  const [nav, setNav] = useState(false)
 
-const Navbar: React.FC<NavbarProps> = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const handleNav = () => {
+    setNav(!nav)
+  }
+
+  const navItems = [
+    { id: 1, text: 'Dashboard', path: '/' },
+    { id: 2, text: 'Meals', path: '/meals' },
+    { id: 3, text: 'Activity', path: '/activity' },
+    { id: 4, text: 'My Information', path: '/my-information' },
+  ]
 
   return (
-    <nav className="bg-white border-b border-gray-200">
-      <div className="container mx-auto px-4 py-2 flex items-baseline">
-        <Link to="/" className="font-bold text-2xl mr-6">
-          Fitness Tracker
-        </Link>
+    <div className="flex justify-between items-center h-20 mx-auto px-4">
+      <h1 className="text-2xl font-bold">
+        <Link to="/">Fitness Tracker</Link>
+      </h1>
 
-        {/* Toggle button for mobile menu */}
-
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          <svg
-            className="w-6 h-6"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+      <ul className="hidden md:flex">
+        {navItems.map((item) => (
+          <li
+            key={item.id}
+            className="hover:text-gray-700 text-xl cursor-pointer px-4"
           >
-            <path
-              fillRule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+            <Link to={item.path}>{item.text}</Link>
+          </li>
+        ))}
+      </ul>
 
-        {/* Navigation links (hidden on mobile) */}
-        <ul
-          className={` hidden md:flex space-x-8 ${isOpen ? 'block' : 'hidden'}`}
-        >
-          <li>
-            <Link className="hover:text-gray-700 text-xl" to="/">
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link className="hover:text-gray-700 text-xl" to="/meals">
-              Meals
-            </Link>
-          </li>
-          <li>
-            <Link className="hover:text-gray-700 text-xl" to="/activity">
-              Activity
-            </Link>
-          </li>
-          <li>
-            <Link className="hover:text-gray-700 text-xl" to="/my-information">
-              My Information
-            </Link>
-          </li>
-        </ul>
+      <div onClick={handleNav} className="block md:hidden">
+        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
-    </nav>
+
+      <ul
+        className={
+          nav
+            ? 'fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-[#F0F4F9] bg-gray-400 ease-in-out duration-500'
+            : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
+        }
+      >
+        <h1 className="w-full text-2xl font-bold text-black m-4">
+          <Link to="/">Fitness Tracker</Link>
+        </h1>
+
+        {navItems.map((item) => (
+          <li
+            key={item.id}
+            className="p-4 hover:bg-[#3B82F8] duration-300 hover:text-black cursor-pointer border-gray-600"
+          >
+            <Link to={item.path}>{item.text}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
