@@ -6,6 +6,8 @@ describe('<App />', () => {
   it('mounts App properly', () => {
     render(<App />)
 
-    expect(screen.getByText(/Fitness Tracker/i)).toBeInTheDocument()
+    expect(
+      screen.getAllByText(/Fitness Tracker/i).length,
+    ).toBeGreaterThanOrEqual(2)
   })
 })
